@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enterprise Electronics — Login</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8f5f1;
+    }
+
+    .container {
+      position: relative;
+      width: 750px;
+      min-height: 460px;
+      background: #f0f4f0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
+    }
+
+    /* ── Form Panels ── */
+    .form-box {
+      position: absolute;
+      top: 0;
+      width: 55%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 2.5rem;
+      transition: transform .6s cubic-bezier(.77, 0, .18, 1), opacity .4s;
+    }
+
+    #login-box  { right: 0; transform: translateX(0); opacity: 1; pointer-events: all; }
+    #register-box { left: 0; transform: translateX(-100%); opacity: 0; pointer-events: none; }
+
+    .container.slide #login-box    { transform: translateX(100%); opacity: 0; pointer-events: none; }
+    .container.slide #register-box { transform: translateX(0);    opacity: 1; pointer-events: all;  }
+
+    .form-box h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #1a1a1a;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .social-row { display: flex; gap: 12px; margin-bottom: 12px; }
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid #bbb;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 13px; font-weight: 700; color: #555;
+      transition: border-color .2s, color .2s;
+    }
+    .social-btn:hover { border-color: #0F6E56; color: #0F6E56; }
+
+    .or { font-size: 12px; color: #888; margin-bottom: 16px; }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+      color: #222;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-box input:focus {
+      border-color: #0F6E56;
+      box-shadow: 0 0 0 3px rgba(15, 110, 86, 0.1);
+    }
+
+    .forgot {
+      font-size: 12px;
+      color: #0F6E56;
+      cursor: pointer;
+      margin-bottom: 18px;
+      align-self: flex-end;
+      text-decoration: none;
+    }
+    .forgot:hover { text-decoration: underline; }
+
+    .btn-primary {
+      padding: 10px 38px;
+      background: #0F6E56;
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background .2s;
+    }
+    .btn-primary:hover { background: #085041; }
+
+    /* ── Sliding Overlay ── */
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(140deg, #0F6E56 0%, #1D9E75 100%);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 2rem;
+      transition: transform .6s cubic-bezier(.77, 0, .18, 1);
+    }
+    .container.slide .overlay { transform: translateX(122.2%); }
+
+    .overlay h2 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 8px; }
+    .chip {
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 12px;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .overlay p {
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.7;
+      margin: 12px 0 20px;
+    }
+
+    .btn-outline {
+      padding: 9px 34px;
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline:hover { background: #fff; color: #0F6E56; }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container">
+
+    <!-- Login Panel -->
+    <div class="form-box" id="login-box">
+      <h2>Log In</h2>
+      <div class="social-row">
+        <div class="social-btn">f</div>
+        <div class="social-btn">G</div>
+        <div class="social-btn">in</div>
+      </div>
+      <p class="or">or use your email account</p>
+      <input type="email" placeholder="Email Address" />
+      <input type="password" placeholder="Password" />
+      <a class="forgot" href="#">Forgot your password?</a>
+      <button class="btn-primary">Log In</button>
+    </div>
+
+    <!-- Register Panel -->
+    <div class="form-box" id="register-box">
+      <h2>Create Account</h2>
+      <div class="social-row">
+        <div class="social-btn">f</div>
+        <div class="social-btn">G</div>
+        <div class="social-btn">in</div>
+      </div>
+      <p class="or">or register with your email</p>
+      <input type="text" placeholder="Full Name" />
+      <input type="email" placeholder="Email Address" />
+      <input type="password" placeholder="Password" />
+      <button class="btn-primary" style="margin-top: 6px;">Sign Up</button>
+    </div>
+
+    <!-- Sliding Green Overlay -->
+    <div class="overlay" id="overlay">
+      <h2 id="overlay-title">Welcome Back!</h2>
+      <div class="chip-row">
+        <span class="chip">📱 Mobiles</span>
+        <span class="chip">📺 TVs</span>
+        <span class="chip">❄️ ACs</span>
+        <span class="chip">🧺 Appliances</span>
+      </div>
+      <p id="overlay-text">
+        To keep browsing the best deals on electronics, log in with your personal info.
+      </p>
+      <button class="btn-outline" id="overlay-btn" onclick="toggle()">Sign Up</button>
+    </div>
+
+  </div>
+
+  <script>
+    let slid = false;
+
+    function toggle() {
+      slid = !slid;
+      document.getElementById('container').classList.toggle('slide', slid);
+      const title = document.getElementById('overlay-title');
+      const text  = document.getElementById('overlay-text');
+      const btn   = document.getElementById('overlay-btn');
+      if (slid) {
+        title.textContent = 'Already a member?';
+        text.textContent  = 'Log in to track your orders, apply for EMI, and access exclusive daily deals on top brands.';
+        btn.textContent   = 'Log In';
+      } else {
+        title.textContent = 'Welcome Back!';
+        text.textContent  = 'To keep browsing the best deals on electronics, log in with your personal info.';
+        btn.textContent   = 'Sign Up';
+      }
+    }
+  </script>
+
+</body>
+</html>
